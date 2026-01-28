@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Fort Collins Street Medics | Community Mutual Aid</title>
 		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="icon" type="image/png" href="images/logo.png" />
 		<link
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap"
 			rel="stylesheet"
@@ -28,7 +29,38 @@
 				background: #dc2626;
 			}
 
-			/* 
+			/* Screen reader only - hide visually but keep accessible */
+			.sr-only {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				padding: 0;
+				margin: -1px;
+				overflow: hidden;
+				clip: rect(0, 0, 0, 0);
+				white-space: nowrap;
+				border-width: 0;
+			}
+
+			/* Enhanced focus styles for accessibility */
+			*:focus-visible {
+				outline: 3px solid #dc2626;
+				outline-offset: 2px;
+			}
+
+			/* Reduce motion for users who prefer it */
+			@media (prefers-reduced-motion: reduce) {
+				*,
+				*::before,
+				*::after {
+					animation-duration: 0.01ms !important;
+					animation-iteration-count: 1 !important;
+					transition-duration: 0.01ms !important;
+					scroll-behavior: auto !important;
+				}
+			}
+
+			/*
                 Implement later?
                 #mobile-menu {
 				transition: all 0.3s ease-in-out;
@@ -36,6 +68,10 @@
 		</style>
 	</head>
 	<body class="bg-black text-white selection:bg-red-600 selection:text-white">
+		<!-- Skip Navigation Link for Accessibility -->
+		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-red-600 focus:text-white focus:px-6 focus:py-3 focus:font-bold focus:uppercase">
+			Skip to main content
+		</a>
 		<nav
 			class="sticky top-0 z-50 bg-black/95 backdrop-blur-md border-b border-white/10"
 		>
@@ -45,7 +81,7 @@
 				<div class="flex items-center gap-4">
 					<img
 						src="images/logo.png"
-						alt="Logo"
+						alt="Fort Collins Street Medics Logo"
 						class="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-red-600"
 					/>
 					<span
@@ -114,6 +150,9 @@
 					<button
 						id="menu-toggle"
 						class="md:hidden text-white focus:outline-none"
+						aria-label="Toggle mobile menu"
+						aria-expanded="false"
+						aria-controls="mobile-menu"
 					>
 						<svg
 							id="menu-icon"
@@ -121,6 +160,7 @@
 							fill="none"
 							stroke="currentColor"
 							viewBox="0 0 24 24"
+							aria-hidden="true"
 						>
 							<path
 								stroke-linecap="round"
@@ -199,6 +239,7 @@
 		</nav>
 
 		<header
+			id="main-content"
 			class="relative min-h-[80vh] md:min-h-[90vh] flex items-center px-6 overflow-hidden border-b border-white/5"
 		>
 			<div
@@ -284,7 +325,7 @@
 					></div>
 					<img
 						src="images/logo.png"
-						alt="FCSM Branding"
+						alt="Fort Collins Street Medics logo featuring a red cross symbol representing community medical aid"
 						class="relative transition duration-500 w-full h-full object-cover rounded-full"
 					/>
 				</div>
@@ -409,7 +450,7 @@
 					>
 						<img
 							src="images/booth.jpg"
-							alt="Booth"
+							alt="Street medics community outreach booth at local event"
 							class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
 						/>
 					</div>
@@ -418,7 +459,7 @@
 					>
 						<img
 							src="images/hemostatic_dressing.jpg"
-							alt="Hemostatic_Dressing"
+							alt="Hemostatic dressing demonstration for emergency bleeding control"
 							class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
 						/>
 					</div>
@@ -426,8 +467,35 @@
 						class="aspect-square bg-zinc-900 overflow-hidden border border-white/10 group"
 					>
 						<img
-							src="training3.jpg"
-							alt="Training 3 (Work in progress. We will take pictures at Jan 24th training event.)"
+							src="images/vaccine.jpg"
+							alt="Community vaccine education and health outreach"
+							class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+						/>
+					</div>
+					<div
+						class="aspect-square bg-zinc-900 overflow-hidden border border-white/10 group"
+					>
+						<img
+							src="images/drag.jpg"
+							alt="Street medics practicing emergency drag rescue technique"
+							class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+						/>
+					</div>
+					<div
+						class="aspect-square bg-zinc-900 overflow-hidden border border-white/10 group"
+					>
+						<img
+							src="images/cpr.jpg"
+							alt="CPR training session with community volunteers"
+							class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+						/>
+					</div>
+					<div
+						class="aspect-square bg-zinc-900 overflow-hidden border border-white/10 group"
+					>
+						<img
+							src="images/tourniquet.jpg"
+							alt="Tourniquet application training for emergency bleeding control"
 							class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
 						/>
 					</div>
@@ -477,7 +545,7 @@
 						<summary
 							class="flex justify-between items-center p-5 md:p-6 font-bold uppercase cursor-pointer list-none text-sm md:text-base"
 						>
-							What does “street medic” mean?
+							What does "street medic" mean?
 							<span
 								class="text-red-600 group-open:rotate-180 transition"
 								>▼</span
@@ -812,34 +880,49 @@
 				>
 					<!-- honeypot -->
 					<p class="hidden">
-						<label>
+						<label for="bot-field">
 							Do not fill this out if you are human
-							<input name="bot-field" />
+							<input id="bot-field" name="bot-field" />
 						</label>
 					</p>
 					<div class="grid md:grid-cols-2 gap-4">
-						<input
-							type="text"
-							name="name"
-							placeholder="NAME"
-							required
-							class="p-4 md:p-5 w-full bg-white text-black font-bold outline-none border-b-4 border-transparent focus:border-black"
-						/>
-						<input
-							type="email"
-							name="email"
-							placeholder="EMAIL"
-							required
-							class="p-4 md:p-5 w-full bg-white text-black font-bold outline-none border-b-4 border-transparent focus:border-black"
-						/>
+						<div>
+							<label for="name" class="sr-only">Your Name</label>
+							<input
+								id="name"
+								type="text"
+								name="name"
+								placeholder="NAME"
+								required
+								aria-required="true"
+								class="p-4 md:p-5 w-full bg-white text-black font-bold outline-none border-b-4 border-transparent focus:border-black"
+							/>
+						</div>
+						<div>
+							<label for="email" class="sr-only">Your Email</label>
+							<input
+								id="email"
+								type="email"
+								name="email"
+								placeholder="EMAIL"
+								required
+								aria-required="true"
+								class="p-4 md:p-5 w-full bg-white text-black font-bold outline-none border-b-4 border-transparent focus:border-black"
+							/>
+						</div>
 					</div>
-					<textarea
-						name="message"
-						placeholder="HOW CAN WE HELP?"
-						rows="4"
-						required
-						class="p-4 md:p-5 w-full bg-white text-black font-bold outline-none border-b-4 border-transparent focus:border-black"
-					></textarea>
+					<div>
+						<label for="message" class="sr-only">Your Message</label>
+						<textarea
+							id="message"
+							name="message"
+							placeholder="HOW CAN WE HELP?"
+							rows="4"
+							required
+							aria-required="true"
+							class="p-4 md:p-5 w-full bg-white text-black font-bold outline-none border-b-4 border-transparent focus:border-black"
+						></textarea>
+					</div>
 					<button
 						type="submit"
 						class="w-full bg-black text-white p-5 md:p-6 font-black uppercase tracking-[0.2em] hover:bg-zinc-900 transition active:scale-95"
@@ -852,7 +935,7 @@
 
 		<footer class="py-12 border-t border-white/10 text-center px-6">
 			<p
-				class="text-[12px] text-gray-600 uppercase tracking-[0.3em] md:tracking-[0.5em] mb-4"
+				class="text-[12px] text-gray-500 uppercase tracking-[0.3em] md:tracking-[0.5em] mb-4"
 			>
 				&copy; 2026 Fort Collins Street Medics
 			</p>
@@ -863,15 +946,18 @@
 			const mobileMenu = document.getElementById("mobile-menu");
 			const menuLinks = document.querySelectorAll(".mobile-link");
 
-			// Toggles menu visibility.
+			// Toggles menu visibility and updates ARIA attributes.
 			menuBtn.addEventListener("click", () => {
+				const isExpanded = menuBtn.getAttribute("aria-expanded") === "true";
 				mobileMenu.classList.toggle("hidden");
+				menuBtn.setAttribute("aria-expanded", !isExpanded);
 			});
 
-			// Closes menu when link is clicked.
+			// Closes menu when link is clicked and updates ARIA attributes.
 			menuLinks.forEach((link) => {
 				link.addEventListener("click", () => {
 					mobileMenu.classList.add("hidden");
+					menuBtn.setAttribute("aria-expanded", "false");
 				});
 			});
 		</script>
