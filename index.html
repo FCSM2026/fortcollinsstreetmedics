@@ -12,7 +12,7 @@
 		/>
 		<style>
 			html {
-				scroll-padding-top: 6rem; /* 96px - accounts for 80px nav + focus ring */
+				scroll-padding-top: 6rem;
 			}
 
 			body {
@@ -29,7 +29,7 @@
 				background: #dc2626;
 			}
 
-			/* Screen reader only - hide visually but keep accessible */
+			/* Screen reader only */
 			.sr-only {
 				position: absolute;
 				width: 1px;
@@ -42,13 +42,12 @@
 				border-width: 0;
 			}
 
-			/* Enhanced focus styles for accessibility */
+			/* Accessibility: Focus and reduce motion */
 			*:focus-visible {
 				outline: 3px solid #dc2626;
 				outline-offset: 2px;
 			}
 
-			/* Reduce motion for users who prefer it */
 			@media (prefers-reduced-motion: reduce) {
 				*,
 				*::before,
@@ -59,17 +58,14 @@
 					scroll-behavior: auto !important;
 				}
 			}
-
-			/*
-                Implement later?
-                #mobile-menu {
-				transition: all 0.3s ease-in-out;
-			} */
 		</style>
 	</head>
 	<body class="bg-black text-white selection:bg-red-600 selection:text-white">
-		<!-- Skip Navigation Link for Accessibility -->
-		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-red-600 focus:text-white focus:px-6 focus:py-3 focus:font-bold focus:uppercase">
+		<!-- Accessibility: Skip navigation link -->
+		<a
+			href="#main-content"
+			class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-red-600 focus:text-white focus:px-6 focus:py-3 focus:font-bold focus:uppercase"
+		>
 			Skip to main content
 		</a>
 		<nav
@@ -896,10 +892,18 @@
 							<input id="bot-field" name="bot-field" />
 						</label>
 					</p>
-					<input type="hidden" name="form-name" value="foco-street-medics" />
+					<input
+						type="hidden"
+						name="form-name"
+						value="foco-street-medics"
+					/>
 					<div class="grid md:grid-cols-2 gap-6">
 						<div>
-							<label for="name" class="block text-white font-bold uppercase tracking-wider text-xs mb-2">Your Name *</label>
+							<label
+								for="name"
+								class="block text-white font-bold uppercase tracking-wider text-xs mb-2"
+								>Your Name *</label
+							>
 							<input
 								id="name"
 								type="text"
@@ -910,10 +914,18 @@
 								aria-describedby="name-error"
 								class="p-4 md:p-5 w-full bg-white text-black font-bold outline-none border-2 border-white focus:border-black transition"
 							/>
-							<p id="name-error" class="text-white text-sm mt-1 hidden" role="alert"></p>
+							<p
+								id="name-error"
+								class="text-white text-sm mt-1 hidden"
+								role="alert"
+							></p>
 						</div>
 						<div>
-							<label for="email" class="block text-white font-bold uppercase tracking-wider text-xs mb-2">Your Email *</label>
+							<label
+								for="email"
+								class="block text-white font-bold uppercase tracking-wider text-xs mb-2"
+								>Your Email *</label
+							>
 							<input
 								id="email"
 								type="email"
@@ -924,11 +936,19 @@
 								aria-describedby="email-error"
 								class="p-4 md:p-5 w-full bg-white text-black font-bold outline-none border-2 border-white focus:border-black transition"
 							/>
-							<p id="email-error" class="text-white text-sm mt-1 hidden" role="alert"></p>
+							<p
+								id="email-error"
+								class="text-white text-sm mt-1 hidden"
+								role="alert"
+							></p>
 						</div>
 					</div>
 					<div>
-						<label for="message" class="block text-white font-bold uppercase tracking-wider text-xs mb-2">Your Message *</label>
+						<label
+							for="message"
+							class="block text-white font-bold uppercase tracking-wider text-xs mb-2"
+							>Your Message *</label
+						>
 						<textarea
 							id="message"
 							name="message"
@@ -939,7 +959,11 @@
 							aria-describedby="message-error"
 							class="p-4 md:p-5 w-full bg-white text-black font-bold outline-none border-2 border-white focus:border-black transition resize-vertical"
 						></textarea>
-						<p id="message-error" class="text-white text-sm mt-1 hidden" role="alert"></p>
+						<p
+							id="message-error"
+							class="text-white text-sm mt-1 hidden"
+							role="alert"
+						></p>
 					</div>
 					<button
 						type="submit"
@@ -964,14 +988,14 @@
 			const mobileMenu = document.getElementById("mobile-menu");
 			const menuLinks = document.querySelectorAll(".mobile-link");
 
-			// Toggles menu visibility and updates ARIA attributes.
+			// Menu button logic
 			menuBtn.addEventListener("click", () => {
-				const isExpanded = menuBtn.getAttribute("aria-expanded") === "true";
+				const isExpanded =
+					menuBtn.getAttribute("aria-expanded") === "true";
 				mobileMenu.classList.toggle("hidden");
 				menuBtn.setAttribute("aria-expanded", !isExpanded);
 			});
 
-			// Closes menu when link is clicked and updates ARIA attributes.
 			menuLinks.forEach((link) => {
 				link.addEventListener("click", () => {
 					mobileMenu.classList.add("hidden");
@@ -989,7 +1013,7 @@
 			const emailError = document.getElementById("email-error");
 			const messageError = document.getElementById("message-error");
 
-			// Show error message for a field
+			// Error message handling
 			function showError(input, errorElement, message) {
 				errorElement.textContent = message;
 				errorElement.classList.remove("hidden");
@@ -998,7 +1022,6 @@
 				input.classList.remove("border-white");
 			}
 
-			// Clear error message for a field
 			function clearError(input, errorElement) {
 				errorElement.textContent = "";
 				errorElement.classList.add("hidden");
@@ -1013,9 +1036,6 @@
 				if (value === "") {
 					showError(nameInput, nameError, "Please enter your name.");
 					return false;
-				} else if (value.length < 2) {
-					showError(nameInput, nameError, "Name must be at least 2 characters.");
-					return false;
 				} else {
 					clearError(nameInput, nameError);
 					return true;
@@ -1027,10 +1047,18 @@
 				const value = emailInput.value.trim();
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 				if (value === "") {
-					showError(emailInput, emailError, "Please enter your email address.");
+					showError(
+						emailInput,
+						emailError,
+						"Please enter your email address.",
+					);
 					return false;
 				} else if (!emailRegex.test(value)) {
-					showError(emailInput, emailError, "Please enter a valid email address.");
+					showError(
+						emailInput,
+						emailError,
+						"Please enter a valid email address.",
+					);
 					return false;
 				} else {
 					clearError(emailInput, emailError);
@@ -1042,10 +1070,19 @@
 			function validateMessage() {
 				const value = messageInput.value.trim();
 				if (value === "") {
-					showError(messageInput, messageError, "Please enter a message.");
+					showError(
+						messageInput,
+						messageError,
+						"Please enter a message.",
+					);
 					return false;
+					// Prevent accidental messages
 				} else if (value.length < 10) {
-					showError(messageInput, messageError, "Message must be at least 10 characters.");
+					showError(
+						messageInput,
+						messageError,
+						"Message must be at least 10 characters.",
+					);
 					return false;
 				} else {
 					clearError(messageInput, messageError);
@@ -1053,7 +1090,7 @@
 				}
 			}
 
-			// Show status message
+			// Show status
 			function showStatus(message, isError = false) {
 				formStatus.textContent = message;
 				formStatus.classList.remove("hidden");
@@ -1100,7 +1137,10 @@
 				const isMessageValid = validateMessage();
 
 				if (!isNameValid || !isEmailValid || !isMessageValid) {
-					showStatus("Please fix the errors above before submitting.", true);
+					showStatus(
+						"Please fix the errors above before submitting.",
+						true,
+					);
 					// Focus on first invalid field
 					if (!isNameValid) {
 						nameInput.focus();
@@ -1112,27 +1152,38 @@
 					return;
 				}
 
-				// If validation passes, submit the form
+				// If valid, submit form
 				try {
 					const formData = new FormData(form);
 					const response = await fetch("/", {
 						method: "POST",
-						headers: { "Content-Type": "application/x-www-form-urlencoded" },
-						body: new URLSearchParams(formData).toString()
+						headers: {
+							"Content-Type": "application/x-www-form-urlencoded",
+						},
+						body: new URLSearchParams(formData).toString(),
 					});
 
 					if (response.ok) {
-						showStatus("Thank you! Your message has been sent successfully.", false);
+						showStatus(
+							"Thank you! Your message has been sent successfully.",
+							false,
+						);
 						form.reset();
-						// Clear any lingering aria-invalid attributes
+						// Clear any aria-invalid attributes
 						nameInput.setAttribute("aria-invalid", "false");
 						emailInput.setAttribute("aria-invalid", "false");
 						messageInput.setAttribute("aria-invalid", "false");
 					} else {
-						showStatus("There was an error submitting your message. Please try again.", true);
+						showStatus(
+							"There was an error submitting your message. Please try again.",
+							true,
+						);
 					}
 				} catch (error) {
-					showStatus("There was an error submitting your message. Please try again.", true);
+					showStatus(
+						"There was an error submitting your message. Please try again.",
+						true,
+					);
 				}
 			});
 		</script>
